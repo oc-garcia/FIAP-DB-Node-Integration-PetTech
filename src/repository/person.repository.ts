@@ -5,7 +5,7 @@ export class PersonRepository {
     return {
       id,
       name: 'John Doe',
-      birth: new Date('1990-01-01'),
+      birth: '1990-01-01',
       cpf: '123.456.789-00',
       email: 'teste@teste.com',
       user_id: 1,
