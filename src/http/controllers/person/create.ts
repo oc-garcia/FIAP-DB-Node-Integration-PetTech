@@ -8,7 +8,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     cpf: z.string().length(14),
     name: z.string(),
     email: z.string().email(),
-    birth: z.string(),
+    birth: z.coerce.date(),
   })
 
   const { cpf, name, email, birth } = registerBodySchema.parse(request.body)

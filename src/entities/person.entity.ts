@@ -2,7 +2,7 @@ export class Person {
   id?: number
   cpf: string
   name: string
-  birth: string
+  birth: string | Date
   email: string
   user_id?: number
 
