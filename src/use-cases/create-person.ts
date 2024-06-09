@@ -4,7 +4,7 @@ import { PersonRepository } from '@/repository/person.repository'
 export class CreatePersonUseCase {
   constructor(private personRepository: PersonRepository) {}
 
-  handler(person: Person): Promise<Person> {
+  handler(person: Person) {
     return this.personRepository.create(person)
   }
 }

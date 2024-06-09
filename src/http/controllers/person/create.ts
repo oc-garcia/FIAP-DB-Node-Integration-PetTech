@@ -5,13 +5,16 @@ import { z } from 'zod'
 
 export async function create(request: FastifyRequest, reply: FastifyReply) {
   const registerBodySchema = z.object({
-    cpf: z.string().length(14),
+    cpf: z.string(),
     name: z.string(),
     email: z.string().email(),
     birth: z.coerce.date(),
+    user_id: z.coerce.number(),
   })
 
-  const { cpf, name, email, birth } = registerBodySchema.parse(request.body)
+  const { cpf, name, email, birth, user_id } = registerBodySchema.parse(
+    request.body,
+  )
 
   try {
     const personRepository = new PersonRepository()
@@ -22,6 +25,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
       name,
       email,
       birth,
+      user_id,
     })
 
     return reply.code(201).send(person)
