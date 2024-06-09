@@ -1,5 +1,4 @@
-import { PersonRepository } from '@/repository/person.repository'
-import { CreatePersonUseCase } from '@/use-cases/create-person'
+import { makeCreatePersonUseCase } from '@/use-cases/factory/make-create-person-use-case'
 import { FastifyReply, FastifyRequest } from 'fastify'
 import { z } from 'zod'
 
@@ -17,8 +16,7 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   )
 
   try {
-    const personRepository = new PersonRepository()
-    const createPersonUseCase = new CreatePersonUseCase(personRepository)
+    const createPersonUseCase = makeCreatePersonUseCase()
 
     const person = await createPersonUseCase.handler({
       cpf,
