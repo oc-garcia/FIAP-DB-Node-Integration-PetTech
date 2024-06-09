@@ -1,18 +1,19 @@
 import { Person } from '@/entities/person.entity'
+import { database } from '@/lib/pg/db'
 
 export class PersonRepository {
-  async findById(id: number): Promise<Person> {
-    return {
-      id,
-      name: 'John Doe',
-      birth: '1990-01-01',
-      cpf: '123.456.789-00',
-      email: 'teste@teste.com',
-      user_id: 1,
-    }
-  }
+  public async create({
+    cpf,
+    birth,
+    email,
+    name,
+    user_id,
+  }: Person): Promise<Person | undefined> {
+    const result = await database.clientInstance?.query<Person>(
+      `INSERT INTO "person" (cpf, birth, email, name, user_id) VALUES ($1, $2, $3, $4, $5) RETURNING *`,
+      [cpf, birth, email, name, user_id],
+    )
 
-  async create(person: Person): Promise<Person> {
-    return person
+    return result?.rows[0]
   }
 }

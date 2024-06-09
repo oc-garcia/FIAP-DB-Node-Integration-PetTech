@@ -17,10 +17,16 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
     const personRepository = new PersonRepository()
     const createPersonUseCase = new CreatePersonUseCase(personRepository)
 
-    await createPersonUseCase.handler({ cpf, name, email, birth })
+    const person = await createPersonUseCase.handler({
+      cpf,
+      name,
+      email,
+      birth,
+    })
 
-    return reply.code(201).send()
+    return reply.code(201).send(person)
   } catch (error) {
-    return reply.code(500).send()
+    console.error(`Error creating user: ${error}`)
+    throw new Error(`Error creating user: ${error}`)
   }
 }
