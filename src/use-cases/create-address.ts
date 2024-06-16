@@ -1,7 +1,7 @@
 import { IAddress } from '@/entities/models/address.interface'
 import { IAddressRepository } from '@/repository/address.repository.interface'
 
-export class CreateAddress {
+export class CreateAddressUseCase {
   constructor(private addressRepository: IAddressRepository) {}
 
   async handler(address: IAddress): Promise<IAddress | undefined> {

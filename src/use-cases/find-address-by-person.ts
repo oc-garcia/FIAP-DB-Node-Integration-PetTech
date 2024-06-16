@@ -2,7 +2,7 @@ import { IAddress } from '@/entities/models/address.interface'
 import { IPerson } from '@/entities/models/person.interface'
 import { IAddressRepository } from '@/repository/address.repository.interface'
 
-export class findAddressByPersonUseCase {
+export class FindAddressByPersonUseCase {
   constructor(private addressRepository: IAddressRepository) {}
 
   async handler(
