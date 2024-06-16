@@ -1,4 +1,4 @@
-import { PersonRepository } from '@/repository/person.repository'
+import { PersonRepository } from '@/repository/postgres/person.repository'
 import { CreatePersonUseCase } from '../create-person'
 
 export function makeCreatePersonUseCase() {

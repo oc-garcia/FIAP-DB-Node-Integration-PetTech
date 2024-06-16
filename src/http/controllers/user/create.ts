@@ -9,15 +9,8 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   })
 
   const { username, password } = registerBodySchema.parse(request.body)
+  const createUserUseCase = makeCreateUserUseCase()
+  const user = await createUserUseCase.handler({ username, password })
 
-  try {
-    const createUserUseCase = makeCreateUserUseCase()
-
-    const user = await createUserUseCase.handler({ username, password })
-
-    return reply.code(201).send(user)
-  } catch (error) {
-    console.error(`Error creating user: ${error}`)
-    throw new Error(`Error creating user: ${error}`)
-  }
+  return reply.code(201).send(user)
 }

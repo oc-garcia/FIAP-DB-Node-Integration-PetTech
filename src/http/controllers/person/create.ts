@@ -14,21 +14,14 @@ export async function create(request: FastifyRequest, reply: FastifyReply) {
   const { cpf, name, email, birth, user_id } = registerBodySchema.parse(
     request.body,
   )
+  const createPersonUseCase = makeCreatePersonUseCase()
+  const person = await createPersonUseCase.handler({
+    cpf,
+    name,
+    email,
+    birth,
+    user_id,
+  })
 
-  try {
-    const createPersonUseCase = makeCreatePersonUseCase()
-
-    const person = await createPersonUseCase.handler({
-      cpf,
-      name,
-      email,
-      birth,
-      user_id,
-    })
-
-    return reply.code(201).send(person)
-  } catch (error) {
-    console.error(`Error creating user: ${error}`)
-    throw new Error(`Error creating user: ${error}`)
-  }
+  return reply.code(201).send(person)
 }
