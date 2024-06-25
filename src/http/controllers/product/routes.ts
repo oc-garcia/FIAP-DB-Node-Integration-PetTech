@@ -4,9 +4,10 @@ import { findAllProducts } from './find-all-products'
 import { findProduct } from './find-product'
 import { update } from './update'
 import { deleteProduct } from './delete'
+// import { validateJwt } from '@/http/middlewares/jwtValidate'
 
 export async function productRoutes(app: FastifyInstance) {
-  app.get('/product', findAllProducts)
+  app.get('/product', /* { onRequest: [validateJwt] }, */ findAllProducts)
   app.get('/product/:id', findProduct)
   app.post('/product', create)
   app.put('/product/:id', update)
