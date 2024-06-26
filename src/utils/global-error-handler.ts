@@ -18,8 +18,12 @@ export const errorHandlerMap: ErrorHandlerMap = {
     })
   },
 
-  ResourceNotFoundError: (error, __, reply) => {
-    reply.status(404).send({ error: error.message })
+  ResourceNotFoundError: (error, _, reply) => {
+    reply.status(404).send({ message: error.message })
+  },
+
+  InvalidCredentialsError: (error, _, reply) => {
+    reply.status(401).send({ error: error.message })
   },
 
   default: (error, _, reply) => {
